@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+.vite/
+coverage/
+.idea/
+.vscode/
+.package/
+.audit-*.png
+*.tsbuildinfo
+# a copia do template em template-legacy/ tem pastas dist/ (bibliotecas) que devem ser versionadas
+!template-legacy/**/dist/

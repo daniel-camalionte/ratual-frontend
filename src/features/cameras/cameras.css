@@ -1,0 +1,39 @@
+/* Câmeras: base = celular; min-width amplia. */
+.cam-touch { min-height: 44px; min-width: 44px; }
+.cam-ico-lg { font-size: 2rem; }
+
+/* player 16:9 */
+.cam-player { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #0b1220; border-radius: 12px; overflow: hidden; color: #fff; }
+.cam-player video { width: 100%; height: 100%; object-fit: contain; display: block; }
+.cam-player__estado { position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; text-align: center; font-size: 0.875rem; background: linear-gradient(135deg, #0f172a, #1e293b); }
+.cam-player__play { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; background: none; border: 0; color: #fff; min-height: 44px; font-weight: 500; }
+.cam-player__play-ico { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(255, 255, 255, 0.18); font-size: 1.75rem; }
+.cam-player__topo { position: absolute; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; padding: 0.5rem; pointer-events: none; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent); }
+.cam-player__controles { position: absolute; inset: auto 0 0 0; display: flex; align-items: center; gap: 0.25rem; padding: 0.5rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); }
+.cam-player__btn { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 8px; background: transparent; color: #fff; font-size: 1.25rem; }
+.cam-player__btn:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* cartões de câmera */
+.cam-card { width: 100%; text-align: left; border: 1px solid var(--bs-border-color, #e5eaef); border-radius: 12px; background: var(--bs-body-bg, #fff); padding: 0.75rem 1rem; min-height: 64px; display: flex; align-items: center; gap: 0.75rem; }
+.cam-card[aria-pressed='true'] { border-color: var(--bs-primary); box-shadow: 0 0 0 2px rgba(27, 132, 255, 0.2); }
+.cam-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--bs-danger); }
+.cam-dot--on { background: var(--bs-success); }
+
+/* fotos das detecções */
+.cam-fotos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+.cam-foto-btn { position: relative; padding: 0; border: 0; background: none; border-radius: 8px; overflow: hidden; min-height: 44px; display: block; }
+.cam-foto-btn small { position: absolute; inset: auto 0 0 0; padding: 1rem 0.5rem 0.25rem; color: #fff; font-size: 0.75rem; text-align: left; background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent); }
+.cam-foto { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 8px; background: var(--bs-light, #f2f4f8); }
+.cam-foto--vazia { display: grid; place-items: center; color: var(--bs-muted, #768b9e); font-size: 1.25rem; }
+.cam-foto--grande { border-radius: 12px; }
+
+.cam-chips { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
+
+@media (min-width: 576px) {
+  .cam-fotos { grid-template-columns: repeat(3, 1fr); }
+  .cam-chips { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 992px) {
+  .cam-fotos { grid-template-columns: repeat(4, 1fr); }
+  .cam-chips { grid-template-columns: repeat(3, 1fr); }
+}

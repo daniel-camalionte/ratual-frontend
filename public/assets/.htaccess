@@ -1,0 +1,4 @@
+# Arquivos de /assets tem hash no nome (mudou o conteudo => muda o nome): cache de 1 ano, imutavel.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>

@@ -1,0 +1,196 @@
+/*
+ * Ajustes do Refrigeração Atual sobre o template MaterialPro (carregado DEPOIS de template.css).
+ * MOBILE PRIMEIRO: o estilo base serve o celular; media queries (min-width) ampliam para telas maiores.
+ */
+
+.min-w-0 { min-width: 0; }
+
+/* =====================================================================
+   Topbar (azul chapado, como o MaterialPro) e marca
+   ===================================================================== */
+.rt-topbar { padding: 0 8px; min-height: 60px; gap: .5rem; }
+@media (min-width: 576px) { .rt-topbar { padding: 0 16px; min-height: 64px; } }
+
+.rt-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+  background: transparent; color: #fff; font-size: 1.35rem; line-height: 1;
+  transition: background-color .15s;
+}
+.rt-icon-btn:hover, .rt-icon-btn:focus-visible, .rt-icon-btn.show { background: rgba(255, 255, 255, .16); color: #fff; }
+.rt-icon-btn::after { display: none !important; } /* remove a setinha do dropdown */
+.rt-dot {
+  position: absolute; top: 9px; right: 10px; width: 10px; height: 10px;
+  background: var(--bs-danger); border: 2px solid var(--bs-primary); border-radius: 50%;
+}
+.rt-dropdown-wide { min-width: min(300px, calc(100vw - 24px)); }
+
+.rt-brand { color: inherit; text-decoration: none; min-width: 0; }
+.rt-brand-lockup { display: inline-flex; align-items: center; gap: .7rem; color: var(--bs-heading-color, #1e2a44); min-width: 0; }
+.rt-brand-lockup.is-light { color: #fff; }
+.rt-logo-mark { flex-shrink: 0; display: block; }
+/* Texto da marca no padrão do logo do MaterialPro: Roboto, CAIXA ALTA, 1ª palavra em negrito e 2ª leve */
+/* Medidas calibradas no logo do MaterialPro: altura de caixa alta 12,8px (Roboto 18px), "PRO" peso 270, negrito peso 600, 16px entre ícone e texto */
+.rt-brand-name { font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif; text-transform: uppercase; font-size: 1.125rem; line-height: 1; letter-spacing: 0; white-space: nowrap; position: relative; top: var(--rt-brand-nudge, .5px); }
+.rt-brand-1 { font-weight: 600; }
+.rt-brand-2 { font-weight: 270; color: #1fb8ee; }
+.is-light .rt-brand-2 { color: #fff; } /* sobre o azul: tudo branco, chapado */
+@media (max-width: 575.98px) { .rt-brand-lockup { gap: .45rem; } .rt-brand-name { font-size: .875rem; --rt-brand-nudge: 1px; } }
+/* celular estreito: duas linhas ("REFRIGERAÇÃO" / "ATUAL") para caber com o menu e os ícones em 320px */
+@media (max-width: 389.98px) {
+  .rt-brand-name { display: flex; flex-direction: column; font-size: .78rem; line-height: 1.15; }
+}
+
+/* =====================================================================
+   Base: cards, formulários, tabelas, acessibilidade
+   ===================================================================== */
+.body-wrapper > .container-fluid { padding-left: 16px; padding-right: 16px; }
+.card .card-body { padding: 1.25rem; }
+.card-title { overflow-wrap: anywhere; }
+
+/* 16px evita o zoom automático do iOS; alvos de toque >= 44px */
+.form-control, .form-select { font-size: 1rem; min-height: 44px; }
+.btn { min-height: 44px; }
+.btn-sm { min-height: 36px; }
+.form-check-input { width: 1.25em; height: 1.25em; }
+.pagination .page-link { min-width: 40px; min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+/* o template põe botões em maiúsculas/capitalizado: aqui mantemos o texto como escrito */
+.btn, .btn-link, .btn-group .btn { text-transform: none !important; }
+
+/* listas com marcador (o reset do template remove) */
+.rt-list { list-style: disc; padding-left: 1.25rem; }
+.rt-list li { margin-bottom: .35rem; }
+
+/* tabelas viram cartões no celular */
+@media (max-width: 575.98px) {
+  .rt-stack thead { display: none; }
+  .rt-stack, .rt-stack tbody { display: block; }
+  .rt-stack tbody tr {
+    display: block; margin-bottom: .75rem; padding: .5rem .875rem;
+    border: 1px solid var(--bs-border-color); border-radius: 12px;
+  }
+  .rt-stack td {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    border: 0; padding: .4rem 0; text-align: end !important;
+  }
+  .rt-stack td::before { content: attr(data-label); font-weight: 600; color: var(--bs-body-color); text-align: start; flex-shrink: 0; }
+  .rt-stack td[colspan]::before { content: none; }
+  .rt-stack td[colspan] { justify-content: center; }
+}
+
+/* espaçamento do conteúdo abaixo da topbar (o menu horizontal só existe >= xl) */
+@media (max-width: 1199.98px) {
+  html[data-layout=horizontal] .body-wrapper { padding-top: 64px; }
+  html[data-layout=horizontal] .body-wrapper > .container-fluid { padding-top: 20px !important; }
+}
+
+@media (min-width: 576px) {
+  .body-wrapper > .container-fluid { padding-left: 24px; padding-right: 24px; }
+  .card .card-body { padding: 1.5rem; }
+  .rt-search { max-width: 320px; }
+}
+@media (min-width: 1200px) {
+  .card .card-body { padding: 1.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+:focus-visible { outline: 2px solid var(--bs-primary); outline-offset: 2px; }
+
+/* StatCard genérico (página de componentes) */
+.rt-stat-icon {
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.4rem;
+}
+.rt-stat-value { font-size: 1.35rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color, inherit); white-space: nowrap; }
+
+/* =====================================================================
+   Dashboard de monitoramento
+   ===================================================================== */
+
+/* entrada escalonada */
+@keyframes rt-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.rt-rise { animation: rt-rise .55s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+
+/* anel pulsante (alertas) */
+@keyframes rt-ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--rt-tone, var(--bs-warning)) 55%, transparent); } 80%, 100% { box-shadow: 0 0 0 10px transparent; } }
+.rt-pulse { animation: rt-ping 1.8s ease-out infinite; }
+
+/* "ao vivo" */
+.rt-live::before {
+  content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%;
+  background: var(--bs-success); animation: rt-ping 1.8s ease-out infinite; --rt-tone: var(--bs-success);
+}
+@keyframes rt-rot { to { transform: rotate(360deg); } }
+.rt-spin .ti { animation: rt-rot .8s linear; }
+
+.rt-legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.rt-bubble { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.rt-big { font-size: 2.25rem; font-weight: 600; line-height: 1; color: var(--bs-heading-color, inherit); }
+
+/* ---------- KPI discreto: círculo sólido com ícone branco + valor + rótulo ---------- */
+.rt-kpi .card-body { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.25rem; }
+.rt-kpi-icon {
+  flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--rt-tone); color: #fff; font-size: 1.45rem;
+}
+.rt-kpi-value { font-size: 1.4rem; font-weight: 500; line-height: 1.2; color: var(--bs-heading-color, inherit); font-variant-numeric: tabular-nums; }
+.rt-kpi-label { font-size: .9rem; line-height: 1.3; color: var(--bs-body-color); }
+.rt-kpi-sub { font-size: .75rem; line-height: 1.3; color: var(--bs-body-color); opacity: .75; }
+
+/* ---------- Alertas ---------- */
+.rt-alerts { max-height: 372px; overflow-y: auto; margin: 0 -.25rem; padding: 0 .25rem; }
+.rt-alert-item { display: flex; gap: .75rem; padding: .7rem 0; border-bottom: 1px solid var(--bs-border-color); }
+.rt-alert-item:last-child { border-bottom: 0; }
+.rt-alert-icon {
+  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1.15rem;
+}
+.rt-alert-icon.is-temp { background: var(--bs-warning-bg-subtle); color: var(--bs-warning); --rt-tone: var(--bs-warning); }
+.rt-alert-icon.is-offline { background: var(--bs-danger-bg-subtle); color: var(--bs-danger); --rt-tone: var(--bs-danger); }
+.rt-alert-title { font-size: .85rem; font-weight: 600; color: var(--bs-heading-color, inherit); }
+.rt-alert-msg { font-size: .78rem; line-height: 1.35; margin-top: 2px; color: var(--bs-body-color); }
+.rt-alert-when { font-size: .7rem; font-weight: 600; flex-shrink: 0; color: var(--bs-body-color); }
+.rt-alert-when.is-new { color: var(--bs-danger); }
+
+/* ---------- Refrigerador: card discreto (padrão weather card do MaterialPro) ---------- */
+.rt-fridge { transition: transform .2s, box-shadow .2s; }
+.rt-fridge:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(27, 132, 255, .12); }
+.rt-fridge .card-body { padding: .85rem; }
+
+/* faixa de cabeçalho em tom claro (azul = normal, amarelo = alerta, cinza = offline) */
+.rt-fridge-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .1rem .75rem;
+  padding: .85rem 1rem; border-radius: 10px;
+  background: color-mix(in srgb, var(--rt-strip) 9%, transparent);
+}
+.rt-fridge-name { font-size: .95rem; font-weight: 500; margin: 0; min-width: 0; overflow-wrap: anywhere; color: var(--bs-heading-color, inherit); }
+.rt-fridge-meta { font-size: .78rem; color: var(--bs-body-color); }
+
+/* ícone redondo + temperatura + segundo dado (compressor) */
+.rt-fridge-main { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; padding: 1rem .35rem .15rem; }
+.rt-fridge-icon {
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; background: color-mix(in srgb, var(--rt-tone) 12%, transparent); color: var(--rt-tone);
+}
+.rt-fridge.is-normal .rt-fridge-icon { background: color-mix(in srgb, var(--bs-primary) 12%, transparent); color: var(--bs-primary); }
+.rt-fridge-temp { font-size: 1.6rem; font-weight: 500; line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--bs-primary); transition: color .3s; }
+.rt-fridge-temp small { font-size: 1rem; font-weight: 400; }
+.rt-fridge.is-alerta .rt-fridge-temp { color: var(--bs-warning); }
+.rt-fridge.is-offline .rt-fridge-temp { color: var(--bs-body-color); opacity: .55; }
+.rt-fridge-state { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; color: var(--bs-body-color); }
+.rt-fridge-state::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--rt-tone); }
+.rt-fridge-stat { margin-left: auto; min-width: 0; }
+.rt-fridge-stat-v { font-size: 1.15rem; font-weight: 500; line-height: 1.2; white-space: nowrap; color: var(--bs-heading-color, inherit); }
+.rt-fridge-stat-l { font-size: .82rem; color: var(--bs-body-color); }
+.rt-fridge.is-offline .rt-fridge-stat-v { opacity: .6; }
+
+/* faixa ideal + marcador (fina e discreta) */
+.rt-range { position: relative; height: 5px; margin: 1.1rem .35rem 0; border-radius: 99px; background: color-mix(in srgb, var(--bs-body-color) 14%, transparent); }
+.rt-range-band { position: absolute; inset: 0; border-radius: 99px; background: color-mix(in srgb, var(--bs-primary) 22%, transparent); }
+.rt-range-marker {
+  position: absolute; top: 50%; width: 13px; height: 13px; border-radius: 50%; transform: translate(-50%, -50%);
+  background: var(--rt-tone); border: 3px solid var(--bs-card-bg, #fff); box-shadow: 0 0 0 1px var(--rt-tone);
+  transition: left .9s cubic-bezier(.2, .8, .2, 1);
+}
+.rt-range-labels { display: flex; justify-content: space-between; margin: .4rem .35rem 0; font-size: .68rem; color: var(--bs-body-color); opacity: .85; }

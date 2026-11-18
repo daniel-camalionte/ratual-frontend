@@ -1,0 +1,88 @@
+/* Alertas: lista de ocorrencias (cartoes no celular, mobile primeiro). */
+.al-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.al-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  min-height: 56px;
+}
+.al-item + .al-item {
+  border-top: 1px solid var(--bs-border-color);
+}
+.al-icone {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 1.25rem;
+}
+.al-icone-danger { background: var(--bs-danger-bg-subtle); color: var(--bs-danger); }
+.al-icone-warning { background: var(--bs-warning-bg-subtle); color: var(--bs-warning); }
+.al-icone-info { background: var(--bs-info-bg-subtle); color: var(--bs-info); }
+.al-icone-success { background: var(--bs-success-bg-subtle); color: var(--bs-success); }
+.al-icone-muted { background: var(--bs-secondary-bg); color: var(--bs-secondary-color); }
+.al-corpo {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.al-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.al-nome {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.al-hora {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  color: var(--bs-secondary-color);
+  white-space: nowrap;
+}
+.al-hora-ativo {
+  color: var(--bs-danger);
+  font-weight: 600;
+}
+.al-desc {
+  color: var(--bs-secondary-color);
+  overflow-wrap: anywhere;
+}
+.al-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.al-filtros .btn {
+  min-height: 44px;
+}
+.al-datas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+}
+.al-datas input {
+  min-height: 44px;
+  font-size: 16px;
+}
+.al-vazio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .al-item { padding: 0.875rem 1.25rem; }
+  .al-datas { width: auto; }
+}
